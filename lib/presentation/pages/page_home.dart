@@ -45,14 +45,14 @@ class _HomePageState extends State<HomePage> {
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(8),
-                                border: Border.all(width: 1, color: kGreyDark)),
+                                border: Border.all(width: 1, color: kGreySoft)),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 CachedNetworkImage(
                                   imageUrl: category.strCategoryThumb ?? "",
                                   width: double.infinity,
-                                  height: 200,
+                                  height: 250,
                                   fit: BoxFit.cover,
                                   placeholder: (context, url) => Center(
                                       child: Shimmer.fromColors(
@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                                         borderRadius: BorderRadius.circular(8),
                                       ),
                                       width: double.infinity,
-                                      height: 200,
+                                      height: 250,
                                     ),
                                   )),
                                   imageBuilder: (context, imageProvider) =>
@@ -85,10 +85,19 @@ class _HomePageState extends State<HomePage> {
                                             "assets/images/default_image.png",
                                             fit: BoxFit.cover,
                                             width: double.infinity,
-                                            height: 200,
+                                            height: 250,
                                           )),
                                 ),
-                                Text(category.strCategory!),
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Text(
+                                    category.strCategory!,
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ),
                               ],
                             ),
                           ))

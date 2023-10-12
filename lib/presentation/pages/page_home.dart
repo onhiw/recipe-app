@@ -108,7 +108,13 @@ class _HomePageState extends State<HomePage> {
           }
           if (state is CategoryError) {
             return Center(
-              child: Text(state.message),
+              child: Text(
+                state.message,
+                style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700),
+              ),
             );
           }
           return Container();

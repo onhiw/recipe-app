@@ -1,23 +1,21 @@
-import 'package:dio/dio.dart';
-import 'package:recipe_app/constants/constant.dart';
 import 'package:recipe_app/data/datasource/category_data_source.dart';
 import 'package:recipe_app/data/models/category_model.dart';
-import 'package:recipe_app/utils/exceptions.dart';
+import 'package:recipe_app/domain/repositories/category_repository.dart';
 
-class CategoryRepositoryImpl implements CategoryDataSource {
+class CategoryRepositoryImpl implements CategoryRepository {
+  final CategoryDataSource categoryDataSource;
+
+  CategoryRepositoryImpl({
+    required this.categoryDataSource,
+  });
+
   @override
-  Future<CategoryModel> getCategoryRecipes() async {
-    final Dio dio = Dio();
-
+  Future<CategoryModel> getCategory() async {
     try {
-      Response res = await dio.get('$baseUrl/categories.php');
-
-      final CategoryModel categoryModel = CategoryModel.fromJson(res.data);
-      return categoryModel;
-    } on DioError catch (err) {
-      throw DioExceptions.fromDioError(
-              dioError: err, errorFrom: "getCategoryRecipes")
-          .errorMessage();
+      final result = await categoryDataSource.getCategoryRecipes();
+      return result;
+    } catch (err) {
+      rethrow;
     }
   }
 }

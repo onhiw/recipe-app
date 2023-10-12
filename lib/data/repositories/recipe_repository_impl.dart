@@ -1,23 +1,21 @@
-import 'package:dio/dio.dart';
 import 'package:recipe_app/data/datasource/recipe_data_source.dart';
 import 'package:recipe_app/data/models/recipe_model.dart';
-import 'package:recipe_app/utils/exceptions.dart';
+import 'package:recipe_app/domain/repositories/recipe_repository.dart';
 
-class RecipeRepositoryImpl implements RecipeDataSource {
+class RecipeRepositoryImpl implements RecipeRepository {
+  final RecipeDataSource recipeDataSource;
+
+  RecipeRepositoryImpl({
+    required this.recipeDataSource,
+  });
+
   @override
-  Future<RecipeModel> searchRecipes(String query) async {
-    final Dio dio = Dio();
-
+  Future<RecipeModel> searchRecipe(String query) async {
     try {
-      Response res =
-          await dio.get('/search.php', queryParameters: {"s": query});
-
-      final RecipeModel recipeModel = RecipeModel.fromJson(res.data);
-      return recipeModel;
-    } on DioError catch (err) {
-      throw DioExceptions.fromDioError(
-              dioError: err, errorFrom: "searchRecipes")
-          .errorMessage();
+      final result = await recipeDataSource.searchRecipes(query);
+      return result;
+    } catch (err) {
+      rethrow;
     }
   }
 }

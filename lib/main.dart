@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:recipe_app/constants/constant.dart';
 import 'package:recipe_app/injection.dart' as di;
-import 'package:recipe_app/presentation/bloc/category-bloc/category_bloc.dart';
 import 'package:recipe_app/presentation/bloc/recipe-bloc/recipe_bloc.dart';
 import 'package:recipe_app/presentation/pages/page_home.dart';
 
@@ -25,9 +24,6 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (_) => di.locator<CategoryBloc>(),
-        ),
         BlocProvider(
           create: (_) => di.locator<RecipeBloc>(),
         ),

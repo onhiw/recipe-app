@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recipe_app/presentation/bloc/recipe-bloc/recipe_bloc.dart';
+import 'package:recipe_app/presentation/pages/page_detail_recipe.dart';
 import 'package:recipe_app/presentation/widgets/loading_widget.dart';
 import 'package:recipe_app/styles/colors.dart';
 import 'package:recipe_app/styles/text_style.dart';
@@ -27,6 +28,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: kPrussianBlue,
         title: Text(
@@ -57,7 +59,13 @@ class _HomePageState extends State<HomePage> {
                                     borderRadius: BorderRadius.circular(8)),
                                 child: InkWell(
                                   borderRadius: BorderRadius.circular(8),
-                                  onTap: () {},
+                                  onTap: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return DetailRecipePage(
+                                          recipeResponse: recipe);
+                                    }));
+                                  },
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -127,10 +135,10 @@ class _HomePageState extends State<HomePage> {
                                             ),
                                             Row(
                                               children: [
-                                                const Icon(
-                                                  Icons.location_on,
+                                                Image.asset(
+                                                  'assets/icons/ic_pin.png',
+                                                  width: 15,
                                                   color: kGreySoft,
-                                                  size: 15,
                                                 ),
                                                 const SizedBox(
                                                   width: 4,
@@ -166,12 +174,22 @@ class _HomePageState extends State<HomePage> {
           }
           if (state is RecipeError) {
             return Center(
-              child: Text(
-                state.message,
-                style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/error_state.jpg',
+                    width: 350,
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Text(
+                    state.message,
+                    style: kError,
+                  ),
+                ],
               ),
             );
           }

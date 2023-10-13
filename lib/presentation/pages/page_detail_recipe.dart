@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe_app/data/models/recipe_response.dart';
 import 'package:recipe_app/styles/colors.dart';
@@ -149,43 +150,145 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                   const SizedBox(
                     height: 8,
                   ),
-                  Row(
-                    children: [
-                      Image.asset(
-                        'assets/icons/ic_pin.png',
-                        width: 15,
-                        color: kGreySoft,
+                  widget.recipeResponse!.strArea == null
+                      ? Container()
+                      : Row(
+                          children: [
+                            Image.asset(
+                              'assets/icons/ic_pin.png',
+                              width: 15,
+                              color: kGreySoft,
+                            ),
+                            const SizedBox(
+                              width: 4,
+                            ),
+                            Text(
+                              widget.recipeResponse!.strArea!,
+                              style: kBodySmall,
+                            ),
+                          ],
+                        ),
+                  widget.recipeResponse!.strCategory == null
+                      ? Container()
+                      : Column(
+                          children: [
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            Text(
+                              "Category : ${widget.recipeResponse!.strCategory!}",
+                              style: kBodySmall,
+                            ),
+                          ],
+                        ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.grey.shade200),
+                    ),
+                    child: ExpandablePanel(
+                      theme: ExpandableThemeData(
+                          inkWellBorderRadius: BorderRadius.circular(10),
+                          iconPadding: const EdgeInsets.all(16),
+                          headerAlignment:
+                              ExpandablePanelHeaderAlignment.center),
+                      header: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 16, right: 16, top: 8, bottom: 8),
+                        child: Text(
+                          'Ingredient',
+                          style: kTitleMSmall,
+                        ),
                       ),
-                      const SizedBox(
-                        width: 4,
+                      collapsed: const SizedBox(height: 0),
+                      expanded: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 16, right: 16, bottom: 8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            RichText(
+                              textAlign: TextAlign.start,
+                              text: TextSpan(
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text:
+                                        '• ${widget.recipeResponse!.strIngredient1!} ',
+                                    style: kBodyMedium,
+                                  ),
+                                  TextSpan(
+                                    text: widget.recipeResponse!.strMeasure1!,
+                                    style: kBodyMedium,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 4,
+                            ),
+                            RichText(
+                              textAlign: TextAlign.start,
+                              text: TextSpan(
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text:
+                                        '• ${widget.recipeResponse!.strIngredient2!} ',
+                                    style: kBodyMedium,
+                                  ),
+                                  TextSpan(
+                                    text: widget.recipeResponse!.strMeasure2!,
+                                    style: kBodyMedium,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      Text(
-                        widget.recipeResponse!.strArea!,
-                        style: kBodySmall,
-                      ),
-                    ],
+                    ),
                   ),
                   const SizedBox(
                     height: 8,
-                  ),
-                  Text(
-                    "Category : ${widget.recipeResponse!.strCategory!}",
-                    style: kBodySmall,
                   ),
                   const SizedBox(
                     height: 16,
                   ),
-                  Text(
-                    'Instructions',
-                    style: kTitleMSmall,
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.grey.shade200),
+                    ),
+                    child: ExpandablePanel(
+                      theme: ExpandableThemeData(
+                          inkWellBorderRadius: BorderRadius.circular(10),
+                          iconPadding: const EdgeInsets.all(16),
+                          headerAlignment:
+                              ExpandablePanelHeaderAlignment.center),
+                      header: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 16, right: 16, top: 8, bottom: 8),
+                        child: Text(
+                          'Instructions',
+                          style: kTitleMSmall,
+                        ),
+                      ),
+                      collapsed: const SizedBox(height: 0),
+                      expanded: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 16, right: 16, bottom: 8),
+                        child: Text(
+                          widget.recipeResponse!.strInstructions!,
+                          textAlign: TextAlign.justify,
+                          style: kBodyMedium,
+                        ),
+                      ),
+                    ),
                   ),
                   const SizedBox(
                     height: 8,
-                  ),
-                  Text(
-                    widget.recipeResponse!.strInstructions!,
-                    textAlign: TextAlign.justify,
-                    style: kBodySmall,
                   ),
                 ],
               ),

@@ -10,5 +10,7 @@ final TextStyle kTitleMSmall = GoogleFonts.poppins(
     fontSize: 14, fontWeight: FontWeight.w600, color: Colors.black);
 final TextStyle kBodySmall = GoogleFonts.poppins(
     fontSize: 12, fontWeight: FontWeight.w400, color: kGreySoft);
+final TextStyle kBodyMedium = GoogleFonts.poppins(
+    fontSize: 13, fontWeight: FontWeight.w400, color: kGreyDark);
 final TextStyle kError = GoogleFonts.poppins(
     fontSize: 14, fontWeight: FontWeight.w400, color: Colors.black);

@@ -1,9 +1,14 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dio/dio.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:recipe_app/data/models/recipe_response.dart';
 import 'package:recipe_app/styles/colors.dart';
 import 'package:recipe_app/styles/text_style.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:shimmer/shimmer.dart';
 
 class DetailRecipePage extends StatefulWidget {
@@ -17,6 +22,23 @@ class DetailRecipePage extends StatefulWidget {
 class _DetailRecipePageState extends State<DetailRecipePage> {
   ScrollController? _scrollController;
   bool lastStatus = true;
+
+  Future<void> urlFileShare(
+      String urlImage, String? title, String? desc) async {
+    final RenderBox? box = context.findRenderObject() as RenderBox?;
+    final response = await Dio().get<List<int>>(
+      urlImage,
+      options: Options(responseType: ResponseType.bytes),
+    );
+    final documentDirectory = (await getApplicationDocumentsDirectory()).path;
+    File imgFile = File('$documentDirectory/images.png');
+    imgFile.writeAsBytesSync(response.data!);
+
+    Share.shareXFiles([XFile(imgFile.path)],
+        subject: title,
+        text: desc,
+        sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size);
+  }
 
   _scrollListener() {
     if (isShrink != lastStatus) {
@@ -151,7 +173,12 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                         style: kTitleMedium,
                       ),
                       GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            urlFileShare(
+                                widget.recipeResponse!.strMealThumb!,
+                                widget.recipeResponse!.strMeal!,
+                                widget.recipeResponse!.strInstructions!);
+                          },
                           child: const Icon(
                             Icons.share,
                             color: Colors.black,

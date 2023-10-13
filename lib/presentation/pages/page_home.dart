@@ -205,7 +205,7 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Image.asset(
                         'assets/images/error_state.jpg',
-                        width: 350,
+                        width: 250,
                       ),
                       const SizedBox(
                         height: 16,
@@ -214,6 +214,30 @@ class _HomePageState extends State<HomePage> {
                         state.message,
                         style: kError,
                       ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Future.microtask(() => BlocProvider.of<RecipeBloc>(
+                                  context,
+                                  listen: false)
+                              .add(GetEventRecipe()));
+                        },
+                        child: Container(
+                          width: 150,
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                              color: kPrussianBlue,
+                              borderRadius: BorderRadius.circular(8)),
+                          child: Center(
+                            child: Text(
+                              'Refresh',
+                              style: kButtonSmall,
+                            ),
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 );

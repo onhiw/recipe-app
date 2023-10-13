@@ -88,7 +88,7 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
               ),
             ),
             pinned: true,
-            expandedHeight: MediaQuery.of(context).size.height * 0.23,
+            expandedHeight: MediaQuery.of(context).size.height * 0.3,
             floating: true,
             centerTitle: false,
             title: Text(
@@ -167,11 +167,16 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        widget.recipeResponse!.name!,
-                        style: kTitleMedium,
+                      Expanded(
+                        child: Text(
+                          widget.recipeResponse!.name!,
+                          style: kTitleMedium,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 16,
                       ),
                       GestureDetector(
                           onTap: () {
@@ -231,7 +236,7 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                             left: 16, right: 16, top: 8, bottom: 8),
                         child: Text(
                           'Nutritions',
-                          style: kTitleMSmall,
+                          style: kTitleSmall,
                         ),
                       ),
                       collapsed: const SizedBox(height: 0),
@@ -325,7 +330,7 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                             left: 16, right: 16, top: 8, bottom: 8),
                         child: Text(
                           'Descriptions',
-                          style: kTitleMSmall,
+                          style: kTitleSmall,
                         ),
                       ),
                       collapsed: const SizedBox(height: 0),

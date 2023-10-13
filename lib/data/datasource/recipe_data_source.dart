@@ -13,7 +13,7 @@ class RecipeDataSourceImpl implements RecipeDataSource {
     final Dio dio = Dio();
 
     try {
-      Response res = await dio.get('$baseUrl/recip');
+      Response res = await dio.get('$baseUrl/recipe');
 
       final RecipeModel recipeModel = RecipeModel.fromJson(res.data);
       return recipeModel;

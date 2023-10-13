@@ -5,6 +5,7 @@
 3. Have implemented a clean architecture
 
 Following are the steps for testing the Recipe App
+
 Testing Success :
 1. Open the application and the first page of the recipe list will appear
 2. Click the item to go to the detail page

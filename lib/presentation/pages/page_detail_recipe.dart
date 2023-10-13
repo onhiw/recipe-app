@@ -6,6 +6,7 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:recipe_app/data/models/recipe_response.dart';
+import 'package:recipe_app/presentation/widgets/flushbar_widget.dart';
 import 'package:recipe_app/styles/colors.dart';
 import 'package:recipe_app/styles/text_style.dart';
 import 'package:share_plus/share_plus.dart';
@@ -26,18 +27,22 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
   Future<void> urlFileShare(
       String urlImage, String? title, String? desc) async {
     final RenderBox? box = context.findRenderObject() as RenderBox?;
-    final response = await Dio().get<List<int>>(
-      urlImage,
-      options: Options(responseType: ResponseType.bytes),
-    );
-    final documentDirectory = (await getApplicationDocumentsDirectory()).path;
-    File imgFile = File('$documentDirectory/images.png');
-    imgFile.writeAsBytesSync(response.data!);
+    try {
+      final response = await Dio().get<List<int>>(
+        urlImage,
+        options: Options(responseType: ResponseType.bytes),
+      );
+      final documentDirectory = (await getApplicationDocumentsDirectory()).path;
+      File imgFile = File('$documentDirectory/images.png');
+      imgFile.writeAsBytesSync(response.data!);
 
-    Share.shareXFiles([XFile(imgFile.path)],
-        subject: title,
-        text: desc,
-        sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size);
+      Share.shareXFiles([XFile(imgFile.path)],
+          subject: title,
+          text: desc,
+          sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size);
+    } on DioError catch (err) {
+      flushbarError(err.toString());
+    }
   }
 
   _scrollListener() {

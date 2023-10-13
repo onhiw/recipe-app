@@ -41,7 +41,7 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
           text: desc,
           sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size);
     } on DioError catch (err) {
-      flushbarError(err.toString());
+      flushbarError(err.error.toString());
     }
   }
 

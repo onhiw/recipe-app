@@ -1,16 +1,19 @@
-# recipe_app
+# Recipe_App
 
-A new Flutter project.
+1. Using the Android platform and developed using the Flutter SDK
+2. The application has implemented Data Loading, Basic UI & Error Handling
+3. Have implemented a clean architecture
 
-## Getting Started
+Following are the steps for testing the Recipe App
+Testing Success :
+1. Open the application and the first page of the recipe list will appear
+2. Click the item to go to the detail page
+3. the detail page only contains data not loading to the server
+4. which contains data only on the first page
 
-This project is a starting point for a Flutter application.
+Testing Error:
+1. turn off the internet
+2. Open the recipe app
+3. Then error handling will appear or an illustration of the error message will appear
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Thank You...

@@ -16,5 +16,7 @@ Testing Error:
 1. turn off the internet
 2. Open the recipe app
 3. Then error handling will appear or an illustration of the error message will appear
+4. Turn the internet back on
+5. Press the refresh button to load the data again
 
 Thank You...

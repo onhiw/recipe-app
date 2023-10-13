@@ -1,4 +1,4 @@
-const String hostDomain = "themealdb.com/api/json/v1/1";
-const String baseUrl = "https://$hostDomain";
+const String hostDomain = "54.179.91.24:5000/api";
+const String baseUrl = "http://$hostDomain";
 
 const String appTitle = "Recipe App";

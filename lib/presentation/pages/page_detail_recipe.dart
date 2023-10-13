@@ -92,7 +92,7 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
             floating: true,
             centerTitle: false,
             title: Text(
-              isShrink ? '${widget.recipeResponse!.strMeal}' : '',
+              isShrink ? '${widget.recipeResponse!.name}' : '',
               style: const TextStyle(
                   fontSize: 16,
                   color: Colors.white,
@@ -112,7 +112,7 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                             width: double.infinity,
                             height: double.infinity,
                             fit: BoxFit.cover,
-                            imageUrl: widget.recipeResponse!.strMealThumb ?? "",
+                            imageUrl: widget.recipeResponse!.image ?? "",
                             placeholder: (context, url) => Center(
                                 child: Shimmer.fromColors(
                               baseColor: Colors.grey[300]!,
@@ -170,15 +170,15 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        widget.recipeResponse!.strMeal!,
+                        widget.recipeResponse!.name!,
                         style: kTitleMedium,
                       ),
                       GestureDetector(
                           onTap: () {
                             urlFileShare(
-                                widget.recipeResponse!.strMealThumb!,
-                                widget.recipeResponse!.strMeal!,
-                                widget.recipeResponse!.strInstructions!);
+                                widget.recipeResponse!.image!,
+                                widget.recipeResponse!.name!,
+                                widget.recipeResponse!.description!);
                           },
                           child: const Icon(
                             Icons.share,
@@ -189,37 +189,29 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                   const SizedBox(
                     height: 8,
                   ),
-                  widget.recipeResponse!.strArea == null
-                      ? Container()
-                      : Row(
-                          children: [
-                            Image.asset(
-                              'assets/icons/ic_pin.png',
-                              width: 15,
-                              color: kGreySoft,
-                            ),
-                            const SizedBox(
-                              width: 4,
-                            ),
-                            Text(
-                              widget.recipeResponse!.strArea!,
-                              style: kBodySmall,
-                            ),
-                          ],
-                        ),
-                  widget.recipeResponse!.strCategory == null
-                      ? Container()
-                      : Column(
-                          children: [
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            Text(
-                              "Category : ${widget.recipeResponse!.strCategory!}",
-                              style: kBodySmall,
-                            ),
-                          ],
-                        ),
+                  Row(
+                    children: [
+                      Image.asset(
+                        'assets/icons/ic_time.png',
+                        width: 15,
+                        color: kGreySoft,
+                      ),
+                      const SizedBox(
+                        width: 4,
+                      ),
+                      Text(
+                        widget.recipeResponse!.time!,
+                        style: kBodySmall,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    "Headline : ${widget.recipeResponse!.headline!}",
+                    style: kBodySmall,
+                  ),
                   const SizedBox(
                     height: 16,
                   ),
@@ -238,7 +230,7 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                         padding: const EdgeInsets.only(
                             left: 16, right: 16, top: 8, bottom: 8),
                         child: Text(
-                          'Ingredient',
+                          'Nutritions',
                           style: kTitleMSmall,
                         ),
                       ),
@@ -255,11 +247,7 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                                 children: <TextSpan>[
                                   TextSpan(
                                     text:
-                                        '• ${widget.recipeResponse!.strIngredient1!} ',
-                                    style: kBodyMedium,
-                                  ),
-                                  TextSpan(
-                                    text: widget.recipeResponse!.strMeasure1!,
+                                        'Caloris : ${widget.recipeResponse!.calories!}',
                                     style: kBodyMedium,
                                   ),
                                 ],
@@ -274,11 +262,37 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                                 children: <TextSpan>[
                                   TextSpan(
                                     text:
-                                        '• ${widget.recipeResponse!.strIngredient2!} ',
+                                        'Carbos : ${widget.recipeResponse!.carbos!}',
                                     style: kBodyMedium,
                                   ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 4,
+                            ),
+                            RichText(
+                              textAlign: TextAlign.start,
+                              text: TextSpan(
+                                children: <TextSpan>[
                                   TextSpan(
-                                    text: widget.recipeResponse!.strMeasure2!,
+                                    text:
+                                        'Fats : ${widget.recipeResponse!.fats!}',
+                                    style: kBodyMedium,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 4,
+                            ),
+                            RichText(
+                              textAlign: TextAlign.start,
+                              text: TextSpan(
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text:
+                                        'Proteins : ${widget.recipeResponse!.proteins!}',
                                     style: kBodyMedium,
                                   ),
                                 ],
@@ -310,7 +324,7 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                         padding: const EdgeInsets.only(
                             left: 16, right: 16, top: 8, bottom: 8),
                         child: Text(
-                          'Instructions',
+                          'Descriptions',
                           style: kTitleMSmall,
                         ),
                       ),
@@ -319,7 +333,7 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
                         padding: const EdgeInsets.only(
                             left: 16, right: 16, bottom: 8),
                         child: Text(
-                          widget.recipeResponse!.strInstructions!,
+                          widget.recipeResponse!.description!,
                           textAlign: TextAlign.justify,
                           style: kBodyMedium,
                         ),

@@ -14,7 +14,7 @@ class RecipeDataSourceImpl implements RecipeDataSource {
 
     try {
       Response res =
-          await dio.get('$baseUrl/search.php', queryParameters: {"s": query});
+          await dio.get('$baseUrl/recipe', queryParameters: {"s": query});
 
       final RecipeModel recipeModel = RecipeModel.fromJson(res.data);
       return recipeModel;

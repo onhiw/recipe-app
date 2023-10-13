@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                         mainAxisSpacing: 8,
                         crossAxisSpacing: 8,
                         children: [
-                          ...state.recipeModel.meals!
+                          ...state.recipeModel.data!
                               .map((recipe) => Card(
                                     elevation: 4,
                                     color: Colors.white,
@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           CachedNetworkImage(
-                                            imageUrl: recipe.strMealThumb ?? "",
+                                            imageUrl: recipe.thumb ?? "",
                                             width: double.infinity,
                                             height: 140,
                                             fit: BoxFit.cover,
@@ -151,7 +151,7 @@ class _HomePageState extends State<HomePage> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  recipe.strMeal!,
+                                                  recipe.name!,
                                                   style: kTitleMedium,
                                                 ),
                                                 const SizedBox(
@@ -160,7 +160,7 @@ class _HomePageState extends State<HomePage> {
                                                 Row(
                                                   children: [
                                                     Image.asset(
-                                                      'assets/icons/ic_pin.png',
+                                                      'assets/icons/ic_time.png',
                                                       width: 15,
                                                       color: kGreySoft,
                                                     ),
@@ -168,7 +168,7 @@ class _HomePageState extends State<HomePage> {
                                                       width: 4,
                                                     ),
                                                     Text(
-                                                      recipe.strArea!,
+                                                      recipe.time!,
                                                       style: kBodySmall,
                                                     ),
                                                   ],
@@ -177,7 +177,7 @@ class _HomePageState extends State<HomePage> {
                                                   height: 8,
                                                 ),
                                                 Text(
-                                                  recipe.strInstructions!,
+                                                  recipe.description!,
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   maxLines: 2,

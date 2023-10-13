@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:recipe_app/styles/colors.dart';
 
-final TextStyle kHeading5 =
-    GoogleFonts.poppins(fontSize: 23, fontWeight: FontWeight.w400);
-final TextStyle kHeading6 = GoogleFonts.poppins(
-    fontSize: 19, fontWeight: FontWeight.w500, letterSpacing: 0.15);
-
-// text theme
-final kTextTheme = TextTheme(
-  headlineSmall: kHeading5,
-  titleLarge: kHeading6,
-);
+final TextStyle kHeading = GoogleFonts.poppins(
+    fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white);
+final TextStyle kTitleMedium = GoogleFonts.poppins(
+    fontSize: 16, fontWeight: FontWeight.w700, color: Colors.black);
+final TextStyle kBodySmall = GoogleFonts.poppins(
+    fontSize: 12, fontWeight: FontWeight.w400, color: kGreySoft);

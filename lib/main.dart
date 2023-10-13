@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:recipe_app/constants/constant.dart';
 import 'package:recipe_app/injection.dart' as di;
 import 'package:recipe_app/presentation/bloc/category-bloc/category_bloc.dart';
 import 'package:recipe_app/presentation/bloc/recipe-bloc/recipe_bloc.dart';
 import 'package:recipe_app/presentation/pages/page_home.dart';
-import 'package:recipe_app/styles/colors.dart';
-import 'package:recipe_app/styles/text_style.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,11 +36,16 @@ class _MyAppState extends State<MyApp> {
         title: appTitle,
         debugShowCheckedModeBanner: false,
         home: const HomePage(),
-        theme: ThemeData.dark().copyWith(
-          colorScheme: kColorScheme,
-          primaryColor: kRichBlack,
-          scaffoldBackgroundColor: kRichBlack,
-          textTheme: kTextTheme,
+        theme: ThemeData(
+          textTheme: GoogleFonts.poppinsTextTheme(
+            Theme.of(context).textTheme,
+          ),
+          pageTransitionsTheme: const PageTransitionsTheme(
+            builders: <TargetPlatform, PageTransitionsBuilder>{
+              TargetPlatform.android: ZoomPageTransitionsBuilder(),
+              TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+            },
+          ),
         ),
       ),
     );

@@ -15,7 +15,7 @@ class LoadingWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SpinKitThreeBounce(
-            color: kOrange,
+            color: kPrussianBlue,
             size: 30.0,
           ),
           SizedBox(
@@ -24,7 +24,7 @@ class LoadingWidget extends StatelessWidget {
           Text(
             "Mohon Tunggu...",
             style: TextStyle(
-              color: kOrange,
+              color: kPrussianBlue,
               fontWeight: FontWeight.w700,
               fontSize: 14,
             ),

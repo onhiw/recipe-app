@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:recipe_app/constants/constant.dart';
 import 'package:recipe_app/data/models/recipe_model.dart';
 import 'package:recipe_app/utils/exceptions.dart';
 
@@ -13,7 +14,7 @@ class RecipeDataSourceImpl implements RecipeDataSource {
 
     try {
       Response res =
-          await dio.get('/search.php', queryParameters: {"s": query});
+          await dio.get('$baseUrl/search.php', queryParameters: {"s": query});
 
       final RecipeModel recipeModel = RecipeModel.fromJson(res.data);
       return recipeModel;

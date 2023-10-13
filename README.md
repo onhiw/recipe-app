@@ -1,4 +1,4 @@
-# Recipe_App
+# Recipe App
 
 1. Using the Android platform and developed using the Flutter SDK
 2. The application has implemented Data Loading, Basic UI & Error Handling

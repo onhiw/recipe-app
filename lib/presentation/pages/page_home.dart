@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     Future.microtask(() => BlocProvider.of<RecipeBloc>(context, listen: false)
-        .add(GetEventRecipe('a')));
+        .add(GetEventRecipe()));
     super.initState();
   }
 
@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
         onRefresh: () async {
           return Future.microtask(() =>
               BlocProvider.of<RecipeBloc>(context, listen: false)
-                  .add(GetEventRecipe('a')));
+                  .add(GetEventRecipe()));
         },
         child: BlocListener<RecipeBloc, RecipeState>(
           listener: (context, state) {

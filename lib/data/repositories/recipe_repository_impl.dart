@@ -10,9 +10,9 @@ class RecipeRepositoryImpl implements RecipeRepository {
   });
 
   @override
-  Future<RecipeModel> searchRecipe(String query) async {
+  Future<RecipeModel> getRecipes() async {
     try {
-      final result = await recipeDataSource.searchRecipes(query);
+      final result = await recipeDataSource.getRecipes();
       return result;
     } catch (err) {
       rethrow;

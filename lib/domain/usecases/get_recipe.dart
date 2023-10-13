@@ -6,7 +6,7 @@ class GetRecipe {
 
   GetRecipe(this.recipeRepository);
 
-  Future<RecipeModel> execute(String query) {
-    return recipeRepository.searchRecipe(query);
+  Future<RecipeModel> execute() {
+    return recipeRepository.getRecipes();
   }
 }

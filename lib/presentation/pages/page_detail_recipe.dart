@@ -143,9 +143,20 @@ class _DetailRecipePageState extends State<DetailRecipePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    widget.recipeResponse!.strMeal!,
-                    style: kTitleMedium,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        widget.recipeResponse!.strMeal!,
+                        style: kTitleMedium,
+                      ),
+                      GestureDetector(
+                          onTap: () {},
+                          child: const Icon(
+                            Icons.share,
+                            color: Colors.black,
+                          ))
+                    ],
                   ),
                   const SizedBox(
                     height: 8,

@@ -1,21 +1,11 @@
-// To parse this JSON data, do
-//
-//     final recipeModel = recipeModelFromJson(jsonString);
-
-import 'dart:convert';
-
+import 'package:equatable/equatable.dart';
 import 'package:recipe_app/data/models/recipe_response.dart';
 
-RecipeModel recipeModelFromJson(String str) =>
-    RecipeModel.fromJson(json.decode(str));
-
-String recipeModelToJson(RecipeModel data) => json.encode(data.toJson());
-
-class RecipeModel {
+class RecipeModel extends Equatable {
   final String? message;
   final List<RecipeResponse>? data;
 
-  RecipeModel({
+  const RecipeModel({
     this.message,
     this.data,
   });
@@ -34,4 +24,7 @@ class RecipeModel {
             ? []
             : List<dynamic>.from(data!.map((x) => x.toJson())),
       };
+
+  @override
+  List<Object?> get props => [message, data];
 }

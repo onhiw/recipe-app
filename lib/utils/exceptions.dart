@@ -2,40 +2,47 @@ import 'package:dio/dio.dart';
 
 class DioExceptions implements Exception {
   static late String message;
-  static int statusCode = -1;
+  // static int statusCode = -1;
 
   DioExceptions.fromDioError(
-      {required DioError dioError, required String? errorFrom}) {
-    switch (dioError.type) {
-      case DioErrorType.cancel:
-        message = "Request to API server was cancelled";
-        break;
-      case DioErrorType.connectTimeout:
-        message = "Connection timeout with API server";
-        break;
-      case DioErrorType.receiveTimeout:
-        message = "Receive timeout in connection with API server";
-        break;
-      case DioErrorType.response:
-        message = _handleError(
-          dioError.response?.statusCode,
-          dioError.response?.data,
-        );
-        statusCode = dioError.response?.statusCode ?? -1;
-        break;
-      case DioErrorType.sendTimeout:
-        message = "Send timeout in connection with API server";
-        break;
-      case DioErrorType.other:
-        if (dioError.message.contains("SocketException")) {
-          message = 'No Internet';
+      {int? statusCode, DioError? dioError, required String? errorFrom}) {
+    if (statusCode != null) {
+      message = _handleError(
+        statusCode,
+        '',
+      );
+    } else {
+      switch (dioError!.type) {
+        case DioErrorType.cancel:
+          message = "Request to API server was cancelled";
           break;
-        }
-        message = "Unexpected error occurred";
-        break;
-      default:
-        message = "Something went wrong";
-        break;
+        case DioErrorType.connectTimeout:
+          message = "Connection timeout with API server";
+          break;
+        case DioErrorType.receiveTimeout:
+          message = "Receive timeout in connection with API server";
+          break;
+        case DioErrorType.response:
+          message = _handleError(
+            dioError.response?.statusCode,
+            dioError.response?.data,
+          );
+          statusCode = dioError.response?.statusCode ?? -1;
+          break;
+        case DioErrorType.sendTimeout:
+          message = "Send timeout in connection with API server";
+          break;
+        case DioErrorType.other:
+          if (dioError.message.contains("SocketException")) {
+            message = 'No Internet';
+            break;
+          }
+          message = "Unexpected error occurred";
+          break;
+        default:
+          message = "Something went wrong";
+          break;
+      }
     }
   }
 
@@ -66,5 +73,5 @@ class DioExceptions implements Exception {
 
   String errorMessage() => message;
 
-  int errorStatusCode() => statusCode;
+  // int errorStatusCode() => statusCode;
 }

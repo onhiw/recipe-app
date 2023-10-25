@@ -1,4 +1,6 @@
-class RecipeResponse {
+import 'package:equatable/equatable.dart';
+
+class RecipeResponse extends Equatable {
   final String? calories;
   final String? carbos;
   final String? description;
@@ -11,9 +13,8 @@ class RecipeResponse {
   final String? proteins;
   final String? thumb;
   final String? time;
-  final String? country;
 
-  RecipeResponse({
+  const RecipeResponse({
     this.calories,
     this.carbos,
     this.description,
@@ -26,7 +27,6 @@ class RecipeResponse {
     this.proteins,
     this.thumb,
     this.time,
-    this.country,
   });
 
   factory RecipeResponse.fromJson(Map<String, dynamic> json) => RecipeResponse(
@@ -42,7 +42,6 @@ class RecipeResponse {
         proteins: json["proteins"],
         thumb: json["thumb"],
         time: json["time"],
-        country: json["country"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -58,6 +57,21 @@ class RecipeResponse {
         "proteins": proteins,
         "thumb": thumb,
         "time": time,
-        "country": country,
       };
+
+  @override
+  List<Object?> get props => [
+        calories,
+        carbos,
+        description,
+        difficulty,
+        fats,
+        headline,
+        id,
+        image,
+        name,
+        proteins,
+        thumb,
+        time
+      ];
 }

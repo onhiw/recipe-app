@@ -8,15 +8,23 @@ abstract class RecipeDataSource {
 }
 
 class RecipeDataSourceImpl implements RecipeDataSource {
+  final Dio dio;
+
+  RecipeDataSourceImpl({required this.dio});
+
   @override
   Future<RecipeModel> getRecipes() async {
-    final Dio dio = Dio();
-
     try {
       Response res = await dio.get('$baseUrl/recipe');
 
-      final RecipeModel recipeModel = RecipeModel.fromJson(res.data);
-      return recipeModel;
+      if (res.statusCode == 200) {
+        final RecipeModel recipeModel = RecipeModel.fromJson(res.data);
+        return recipeModel;
+      } else {
+        throw DioExceptions.fromDioError(
+                statusCode: res.statusCode, errorFrom: "getRecipes")
+            .errorMessage();
+      }
     } on DioError catch (err) {
       throw DioExceptions.fromDioError(dioError: err, errorFrom: "getRecipes")
           .errorMessage();

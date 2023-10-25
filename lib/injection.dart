@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:recipe_app/data/datasource/recipe_data_source.dart';
 import 'package:recipe_app/data/repositories/recipe_repository_impl.dart';
@@ -16,5 +17,9 @@ void init() {
     () => RecipeRepositoryImpl(recipeDataSource: locator()),
   );
 
-  locator.registerLazySingleton<RecipeDataSource>(() => RecipeDataSourceImpl());
+  locator.registerLazySingleton<RecipeDataSource>(
+      () => RecipeDataSourceImpl(dio: locator()));
+
+  // external
+  locator.registerLazySingleton(() => Dio());
 }

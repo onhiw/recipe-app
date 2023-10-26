@@ -6,6 +6,7 @@ import 'package:mockito/mockito.dart';
 import 'package:recipe_app/constants/constant.dart';
 import 'package:recipe_app/data/datasource/recipe_data_source.dart';
 import 'package:recipe_app/data/models/recipe_model.dart';
+import 'package:recipe_app/utils/exceptions.dart';
 
 import '../../helpers/test_helper.mocks.dart';
 import '../../json_reader.dart';
@@ -21,7 +22,8 @@ void main() {
 
   group('fetch recipes', () {
     final tRecipesModel =
-        RecipeModel.fromJson(json.decode(readJson('dummy_data/recipes.json')));
+        RecipeModel.fromJson(json.decode(readJson('dummy_data/recipes.json')))
+            .data;
 
     test('should return list of Recipe Model when the response code is 200',
         () async {
@@ -35,12 +37,11 @@ void main() {
       final result = await recipeDataSourceImpl.getRecipes();
 
       //assert
-      expect(result, tRecipesModel);
+      expect(result.data, equals(tRecipesModel));
     });
 
     test('should throw a Exception when the response code is 404 or other',
         () async {
-      // const message = """{"message": "Not Found."}""";
       //arrange
       when(mockDio.get('$baseUrl/recipe')).thenAnswer((_) async => Response(
           data: 'Bad Request',
@@ -51,7 +52,7 @@ void main() {
       final call = recipeDataSourceImpl.getRecipes();
 
       //assert
-      expect(() => call, throwsA(isA<String>()));
+      expect(() => call, throwsA(isA<DioExceptions>()));
     });
   });
 }

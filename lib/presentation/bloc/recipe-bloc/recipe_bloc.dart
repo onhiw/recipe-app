@@ -11,14 +11,12 @@ class RecipeBloc extends Bloc<RecipeEvent, RecipeState> {
   RecipeBloc(this.getRecipe) : super(RecipeInitial()) {
     on<RecipeEvent>((event, emit) async {
       if (event is GetEventRecipe) {
-        try {
-          emit(RecipeLoading());
+        emit(RecipeLoading());
 
-          final RecipeModel recipeModel = await getRecipe.execute();
-          emit(RecipeLoaded(recipeModel));
-        } catch (err) {
-          emit(RecipeError(err));
-        }
+        final recipeModel = await getRecipe.execute();
+
+        recipeModel.fold((failure) => emit(RecipeError(failure.message)),
+            (recipeModel) => emit(RecipeLoaded(recipeModel)));
       }
     });
   }

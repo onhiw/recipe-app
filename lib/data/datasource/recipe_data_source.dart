@@ -14,20 +14,13 @@ class RecipeDataSourceImpl implements RecipeDataSource {
 
   @override
   Future<RecipeModel> getRecipes() async {
-    try {
-      Response res = await dio.get('$baseUrl/recipe');
+    final res = await dio.get('$baseUrl/recipe');
 
-      if (res.statusCode == 200) {
-        final RecipeModel recipeModel = RecipeModel.fromJson(res.data);
-        return recipeModel;
-      } else {
-        throw DioExceptions.fromDioError(
-                statusCode: res.statusCode, errorFrom: "getRecipes")
-            .errorMessage();
-      }
-    } on DioError catch (err) {
-      throw DioExceptions.fromDioError(dioError: err, errorFrom: "getRecipes")
-          .errorMessage();
+    if (res.statusCode == 200) {
+      final RecipeModel recipeModel = RecipeModel.fromJson(res.data);
+      return recipeModel;
+    } else {
+      throw DioExceptions();
     }
   }
 }

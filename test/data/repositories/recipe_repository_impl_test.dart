@@ -46,8 +46,10 @@ void main() {
       //arrange
       when(mockRecipeDataSource.getRecipes())
           .thenAnswer((_) async => tRecipeModel);
+
       //act
       final result = await recipeRepositoryImpl.getRecipes();
+
       //assert
       verify(mockRecipeDataSource.getRecipes());
       final results = result.getOrElse(() =>
@@ -59,11 +61,11 @@ void main() {
         'should return server failure when the call to remote data source is unsuccessful',
         () async {
       //arrange
-
       when(mockRecipeDataSource.getRecipes()).thenThrow(DioExceptions());
 
       //act
       final result = await recipeRepositoryImpl.getRecipes();
+
       //assert
       verify(mockRecipeDataSource.getRecipes());
       expect(result, equals(const Left(ServerFailure(''))));

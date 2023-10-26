@@ -18,7 +18,6 @@ class RecipeRepositoryImpl implements RecipeRepository {
       final result = await recipeDataSource.getRecipes();
       return Right(result);
     } on DioExceptions {
-      // print(err);
       return const Left(ServerFailure(''));
     }
   }

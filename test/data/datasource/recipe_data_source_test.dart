@@ -40,7 +40,7 @@ void main() {
       expect(result.data, equals(tRecipesModel));
     });
 
-    test('should throw a Exception when the response code is 404 or other',
+    test('should throw a Exception when the response code is 400 or other',
         () async {
       //arrange
       when(mockDio.get('$baseUrl/recipe')).thenAnswer((_) async => Response(

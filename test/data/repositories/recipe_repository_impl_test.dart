@@ -58,7 +58,7 @@ void main() {
     });
 
     test(
-        'should return server failure when the call to remote data source is unsuccessful',
+        'should return server failure when the call to recipe data source is unsuccessful',
         () async {
       //arrange
       when(mockRecipeDataSource.getRecipes()).thenThrow(DioExceptions());
